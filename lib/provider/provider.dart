@@ -114,13 +114,23 @@ class auth with ChangeNotifier {
       'time': _wakeTime.hour.toString() + ":" + _wakeTime.minute.toString(),
       'notes': _wakeNotes
     });
-
+    noti.showBigTextNotification(
+        title: _wakename,
+        body: _wakeNotes,
+        hour: _wakeTime.hour,
+        minute: _wakeTime.minute,
+        fln: flnp);
     saveEvents('sleep', {
       'name': 'وقت النوم',
       'time': _sleepTime.hour.toString() + ":" + _sleepTime.minute.toString(),
       'notes': _sleepNotes
     });
-
+    noti.showBigTextNotification(
+        title: _sleepName,
+        body: _sleepNotes,
+        hour: _sleepTime.hour,
+        minute: _sleepTime.minute,
+        fln: flnp);
     DateTime _wakeDateTime =
         DateTime(2023, 1, 1, _wakeTime.hour, _wakeTime.minute);
     DateTime meal1Time = _wakeDateTime.add(Duration(hours: 1));
@@ -157,7 +167,24 @@ class auth with ChangeNotifier {
     _meal2Time = _meal2;
     _meal3Time = _meal3;
     print(_mealsString);
-
+    noti.showBigTextNotification(
+        title: _meals[0]['name'].toString(),
+        body: _meals[0]['notes'].toString(),
+        hour: _meal1Time.hour,
+        minute: _meal1Time.minute,
+        fln: flnp);
+    noti.showBigTextNotification(
+        title: _meals[1]['name'].toString(),
+        body: _meals[1]['notes'].toString(),
+        hour: _meal2Time.hour,
+        minute: _meal2Time.minute,
+        fln: flnp);
+    noti.showBigTextNotification(
+        title: _meals[2]['name'].toString(),
+        body: _meals[2]['notes'].toString(),
+        hour: _meal3Time.hour,
+        minute: _meal3Time.minute,
+        fln: flnp);
     saveEvents('meals', _mealsString);
 
     _load = true;

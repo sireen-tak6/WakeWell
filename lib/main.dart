@@ -62,7 +62,7 @@ class _WakeWellState extends State<WakeWell> {
                     future: auth.getEvents(),
                     builder: (ctx, AsyncSnapshot authsnapshot) =>
                         authsnapshot.connectionState == ConnectionState.waiting
-                            ? CircularProgressIndicator()
+                            ? const CircularProgressIndicator()
                             : const home()),
           ),
         ),
