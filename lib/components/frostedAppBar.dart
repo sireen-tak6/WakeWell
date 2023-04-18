@@ -32,37 +32,34 @@ class _FrostedAppBarState extends State<FrostedAppBar> {
     final scHeight = Provider.of<auth>(context, listen: false).screenHeight;
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Positioned(
-        top: 0,
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: widget.blurStrengthX ?? 10,
-              sigmaY: widget.blurStrengthY ?? 10,
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: scHeight * 0.01, horizontal: scWidth * 0.05),
-              color: widget.color,
-              alignment: Alignment.center,
-              width: scWidth,
-              height: widget.height ?? 100,
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 15),
-                    width: scWidth * 0.01,
-                    color: Colors.transparent,
-                    child: widget.leading,
-                  ),
-                  Expanded(
-                    child: Container(child: widget.title ?? Container()),
-                  ),
-                  Container(
-                    width: scWidth * 0.05,
-                  )
-                ],
-              ),
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: widget.blurStrengthX ?? 10,
+            sigmaY: widget.blurStrengthY ?? 10,
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+                vertical: scHeight * 0.01, horizontal: scWidth * 0.05),
+            color: widget.color,
+            alignment: Alignment.center,
+            width: scWidth,
+            height: widget.height ?? 100,
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 15),
+                  width: scWidth * 0.01,
+                  color: Colors.transparent,
+                  child: widget.leading,
+                ),
+                Expanded(
+                  child: Container(child: widget.title ?? Container()),
+                ),
+                Container(
+                  width: scWidth * 0.05,
+                )
+              ],
             ),
           ),
         ),

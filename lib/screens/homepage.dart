@@ -16,11 +16,10 @@ class home extends StatelessWidget {
     final scWidth = Provider.of<auth>(context).screenWidth;
     final scHeight = Provider.of<auth>(context).screenHeight;
     // to hide the status bar
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
-        child: Stack(fit: StackFit.expand, children: [
+        child: Stack(alignment: Alignment.topCenter, children: [
           Container(
             width: scWidth,
             padding: EdgeInsets.symmetric(horizontal: scWidth * 0.05),

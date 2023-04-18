@@ -18,7 +18,7 @@ class dayAlarms extends StatelessWidget {
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
-        child: Stack(fit: StackFit.expand, children: [
+        child: Stack(alignment: Alignment.topCenter, children: [
           Container(
             height: scHeight,
             width: scWidth,
