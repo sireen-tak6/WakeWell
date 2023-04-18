@@ -108,6 +108,8 @@ class auth with ChangeNotifier {
   }
 
   addMeals() async {
+    _sleepName = 'وقت النوم';
+    _wakename = 'وقت الإستيقاظ';
     var sp = await SharedPreferences.getInstance();
     saveEvents('wake', {
       'name': 'وقت الإستيقاظ',
