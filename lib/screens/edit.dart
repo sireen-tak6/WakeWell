@@ -96,6 +96,7 @@ class _editEventState extends State<editEvent> {
       notes = editEvent.event['notes'];
       editEvent.time = editEvent.event['time'];
       load = true;
+      print(args['type']);
     }
     /*
     var scHeight = Provider.of<auth>(context).screenHeight;
@@ -103,7 +104,6 @@ class _editEventState extends State<editEvent> {
 */
     var scHeight = MediaQuery.of(context).size.height;
     var scWidth = MediaQuery.of(context).size.width;
-    print(widget.type);
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -124,7 +124,7 @@ class _editEventState extends State<editEvent> {
                     child: ListView(
                       children: [
                         Container(
-                          height: scHeight * 0.85,
+                          height: scHeight * 0.8,
                           child: ListView(
                             children: [
                               SizedBox(

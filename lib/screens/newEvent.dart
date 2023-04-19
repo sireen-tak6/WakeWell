@@ -90,7 +90,7 @@ class _newEventState extends State<newEvent> {
                     child: ListView(
                       children: [
                         Container(
-                          height: scHeight * 0.85,
+                          height: scHeight * 0.8,
                           padding: EdgeInsets.only(bottom: scHeight * 0.05),
                           child: ListView(
                             children: [

@@ -34,7 +34,7 @@ class noti {
       android: androidPlatformChannelSpecifics,
     );
     await fln.zonedSchedule(
-        0,
+        id,
         title,
         body,
         tz1.TZDateTime.from(dattime, tz1.local),
