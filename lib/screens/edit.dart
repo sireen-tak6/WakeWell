@@ -9,8 +9,6 @@ import '../components/textFeild.dart';
 import '../provider/provider.dart';
 
 class editEvent extends StatefulWidget {
-  static var change = false;
-
   static var event;
   static final routename = 'editEvent';
   static TimeOfDay? time;
@@ -99,9 +97,12 @@ class _editEventState extends State<editEvent> {
       editEvent.time = editEvent.event['time'];
       load = true;
     }
+    /*
     var scHeight = Provider.of<auth>(context).screenHeight;
     var scWidth = Provider.of<auth>(context).screenWidth;
-
+*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     print(widget.type);
     return Scaffold(
       body: Directionality(
@@ -122,19 +123,17 @@ class _editEventState extends State<editEvent> {
                     key: _formKey,
                     child: ListView(
                       children: [
-                        SizedBox(
-                          height: scHeight * 0.12,
-                        ),
                         Container(
-                          height:
-                              scHeight - scWidth * 0.15 * 2 - scHeight * 0.12,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                          height: scHeight * 0.85,
+                          child: ListView(
                             children: [
+                              SizedBox(
+                                height: scHeight * 0.1,
+                              ),
                               textFeild(
                                 controller: nameController,
+                                name: 'اسم الدواء',
                                 focus: namefocus,
-                                name: "الاسم :",
                                 valid: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'يرجى إدخال الاسم ';
@@ -142,38 +141,30 @@ class _editEventState extends State<editEvent> {
                                   return null;
                                 },
                                 save: (value) {
-                                  setState(() {
-                                    name = value;
-                                    nameController.text = value;
-                                    if (value != editEvent.event['name']) {
-                                      editEvent.change = true;
-                                    }
-                                  });
+                                  name = value;
+                                  print(name);
                                 },
-                                suffix: "",
+                                suffix: '',
                                 enabled: true,
-                                type: TextInputType.text,
+                                type: TextInputType.name,
                               ),
                               SizedBox(height: scHeight * 0.05),
                               textFeild(
-                                controller: notesController,
-                                focus: notesfocus,
-                                name: "الملاحظات :",
-                                valid: (value) {
-                                  return null;
-                                },
-                                save: (value) {
-                                  notes = value;
-                                  setState(() {
-                                    if (value != editEvent.event['notes']) {
-                                      editEvent.change = true;
-                                    }
-                                  });
-                                },
-                                suffix: "",
-                                enabled: true,
-                                type: TextInputType.text,
-                              ),
+                                  controller: notesController,
+                                  focus: notesfocus,
+                                  name: "ملاحظات",
+                                  valid: (value) {
+                                    return null;
+                                  },
+                                  save: (value) {
+                                    setState(() {
+                                      notes = value;
+                                      print(notes);
+                                    });
+                                  },
+                                  suffix: "",
+                                  enabled: true,
+                                  type: TextInputType.text),
                               SizedBox(height: scHeight * 0.05),
                               Container(
                                 height: scHeight * 0.25,
@@ -182,44 +173,39 @@ class _editEventState extends State<editEvent> {
                                   time: editEvent.time,
                                 ),
                               ),
-                              Expanded(
-                                child: SizedBox(),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: scHeight * 0.05,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                width: scWidth * 0.3,
+                                child: button(
+                                    ontap: () {
+                                      Provider.of<auth>(context, listen: false)
+                                          .editEvent(
+                                              args['type'],
+                                              args['id'],
+                                              name,
+                                              editEvent.time,
+                                              notes,
+                                              context);
+                                    },
+                                    text: "حفظ"),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
+                              if (args['type'] == 'med')
+                                Container(
                                     width: scWidth * 0.3,
                                     child: button(
-                                        ontap: editEvent.change
-                                            ? () {
-                                                Provider.of<auth>(context,
-                                                        listen: false)
-                                                    .editEvent(
-                                                        args['type'],
-                                                        args['id'],
-                                                        name,
-                                                        editEvent.time,
-                                                        notes,
-                                                        context);
-                                              }
-                                            : () {},
-                                        text: "حفظ"),
-                                  ),
-                                  if (args['type'] == 'med')
-                                    Container(
-                                        width: scWidth * 0.3,
-                                        child: button(
-                                            ontap: () {
-                                              Provider.of<auth>(context,
-                                                      listen: false)
-                                                  .deleteEvent(
-                                                      args['id'], context);
-                                            },
-                                            text: "حذف"))
-                                ],
-                              )
+                                        ontap: () {
+                                          Provider.of<auth>(context,
+                                                  listen: false)
+                                              .deleteEvent(args['id'], context);
+                                        },
+                                        text: "حذف"))
                             ],
                           ),
                         ),
@@ -242,7 +228,7 @@ class _editEventState extends State<editEvent> {
                 child: Text(
                   editEvent.event['name'],
                   style: TextStyle(
-                    fontSize: Provider.of<auth>(context).screenHeight * 0.035,
+                    fontSize: scHeight * 0.035,
                     color: Color.fromARGB(255, 81, 84, 70),
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,

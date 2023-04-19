@@ -12,8 +12,12 @@ class dayAlarms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scWidth = MediaQuery.of(context).size.width;
+    final scHeight = MediaQuery.of(context)
+        .size
+        .height; /*
     var scHeight = Provider.of<auth>(context).screenHeight;
-    var scWidth = Provider.of<auth>(context).screenWidth;
+    var scWidth = Provider.of<auth>(context).screenWidth;*/
     var _medicens = Provider.of<auth>(context).medicens;
     return Scaffold(
       body: Directionality(
@@ -23,7 +27,14 @@ class dayAlarms extends StatelessWidget {
             height: scHeight,
             width: scWidth,
             decoration: BoxDecoration(
-                gradient: Provider.of<auth>(context).blueGradient),
+                gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 217, 239, 245),
+                Color.fromARGB(255, 154, 198, 209)
+              ],
+            )),
             child: Column(
               children: [
                 Container(
@@ -83,7 +94,7 @@ class dayAlarms extends StatelessWidget {
               child: Text(
                 'WakeWell',
                 style: TextStyle(
-                  fontSize: Provider.of<auth>(context).screenHeight * 0.035,
+                  fontSize: scHeight * 0.035,
                   color: Color.fromARGB(255, 81, 84, 70),
                   fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.italic,

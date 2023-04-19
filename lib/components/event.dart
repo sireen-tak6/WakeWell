@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:wakewell/components/timeField.dart';
+import 'package:wakewell/main.dart';
 import 'package:wakewell/screens/edit.dart';
 
 import '../provider/provider.dart';
@@ -21,8 +22,12 @@ class event extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context)
+        .size
+        .width; /*
     var scHeight = Provider.of<auth>(context).screenHeight;
-    var scWidth = Provider.of<auth>(context).screenWidth;
+    var scWidth = Provider.of<auth>(context).screenWidth;*/
     return Directionality(
       textDirection: TextDirection.rtl,
       child: GestureDetector(
@@ -53,11 +58,11 @@ class event extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: TextStyle(fontSize: scHeight * 0.022),
+                    style: TextStyle(fontSize: scWidth * fontSize),
                   ),
                   Text(
                     time.format(context),
-                    style: TextStyle(fontSize: scHeight * 0.022),
+                    style: TextStyle(fontSize: scWidth * fontSize),
                   ),
                 ],
               ),

@@ -28,8 +28,11 @@ class FrostedAppBar extends StatefulWidget {
 class _FrostedAppBarState extends State<FrostedAppBar> {
   @override
   Widget build(BuildContext context) {
+    /*
     final scWidth = Provider.of<auth>(context, listen: false).screenWidth;
-    final scHeight = Provider.of<auth>(context, listen: false).screenHeight;
+    final scHeight = Provider.of<auth>(context, listen: false).screenHeight;*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Positioned(

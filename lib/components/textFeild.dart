@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wakewell/main.dart';
 
 class textFeild extends StatefulWidget {
   final controller;
@@ -30,6 +31,8 @@ class textFeild extends StatefulWidget {
 class _textFeildState extends State<textFeild> {
   @override
   Widget build(BuildContext context) {
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextFormField(
@@ -39,7 +42,10 @@ class _textFeildState extends State<textFeild> {
           cursorColor: Theme.of(context).primaryColorLight,
           decoration: InputDecoration(
             suffixText: widget.suffix,
-            labelStyle: TextStyle(color: Theme.of(context).primaryColorLight),
+            suffixStyle: TextStyle(fontSize: scWidth * fontSize),
+            labelStyle: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+                fontSize: scWidth * fontSize),
             focusedBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(color: Color.fromARGB(218, 78, 161, 70))),

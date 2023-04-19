@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:wakewell/provider/provider.dart';
 import 'package:wakewell/screens/edit.dart';
 
+import '../main.dart';
+
 class timeFeild extends StatefulWidget {
   String? label;
   TimeOfDay? time;
@@ -18,8 +20,11 @@ class timeFeild extends StatefulWidget {
 class _timeFeildState extends State<timeFeild> {
   @override
   Widget build(BuildContext context) {
+    /*
     final scWidth = Provider.of<auth>(context, listen: true).screenWidth;
-    final scHeight = Provider.of<auth>(context, listen: true).screenHeight;
+    final scHeight = Provider.of<auth>(context, listen: true).screenHeight;*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     TimeOfDay selectedDate = widget.label == "وقت النوم"
         ? Provider.of<auth>(context, listen: true).getSleepTime
         : widget.label == "الوقت"
@@ -98,12 +103,6 @@ class _timeFeildState extends State<timeFeild> {
           setState(() {
             widget.time = picked;
             editEvent.time = picked;
-            if (widget.time != editEvent.event['time']) {
-              editEvent.change = true;
-            } else {
-              editEvent.change = false;
-            }
-            print(editEvent.change);
           });
         } else {
           Provider.of<auth>(context, listen: false).setAwakeTime = picked;
@@ -157,7 +156,7 @@ class _timeFeildState extends State<timeFeild> {
                       child: Text(
                         widget.label ?? "",
                         style: TextStyle(
-                            fontSize: scHeight * 0.023,
+                            fontSize: scWidth * fontSize,
                             fontWeight: FontWeight.w600),
                       ),
                     ),
@@ -168,7 +167,7 @@ class _timeFeildState extends State<timeFeild> {
                           Text(
                             '${selectedDate.format(context)}',
                             style: TextStyle(
-                                fontSize: scHeight * 0.04,
+                                fontSize: scWidth * fontSize,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                           ),
@@ -198,7 +197,7 @@ class _timeFeildState extends State<timeFeild> {
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: scHeight * 0.02),
+                                    fontSize: scWidth * fontSize),
                               ),
                             ),
                           ),

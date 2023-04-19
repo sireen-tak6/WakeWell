@@ -8,8 +8,6 @@ import 'notifications.dart';
 
 class auth with ChangeNotifier {
   static SharedPreferences? sp;
-  final _screenSize =
-      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
 
   final _greenGradient = LinearGradient(
     begin: Alignment.topLeft,
@@ -54,8 +52,6 @@ class auth with ChangeNotifier {
   var _medicens = [];
   bool _load = false;
   get load => _load;
-  get screenWidth => _screenSize.width;
-  get screenHeight => _screenSize.height;
   get getWakeTime => _wakeTime;
   get getSleepTime => _sleepTime;
   get greenGradient => _greenGradient;
@@ -476,7 +472,10 @@ class auth with ChangeNotifier {
         _meds.add(_med1);
       }
       saveEvents('med', _meds);
-      Navigator.of(context).pushNamed(dayAlarms.routeName);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => dayAlarms()),
+          (Route<dynamic> route) => false);
     }
   }
 
@@ -563,7 +562,10 @@ class auth with ChangeNotifier {
         hour: time.hour,
         minute: time.minute,
         fln: flnp);
-    Navigator.of(context).pushReplacementNamed(dayAlarms.routeName);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => dayAlarms()),
+        (Route<dynamic> route) => false);
   }
 
   void deleteEvent(id, context) {

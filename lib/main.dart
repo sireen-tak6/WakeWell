@@ -9,11 +9,13 @@ import 'provider/provider.dart';
 import 'screens/homepage.dart';
 import 'provider/notifications.dart';
 
+final fontSize = 0.05;
+
 final FlutterLocalNotificationsPlugin flnp =
     new FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  noti.initialize(flnp);
+  /* noti.initialize(flnp);*/
 
   runApp(
     WakeWell(),

@@ -5,6 +5,7 @@ import 'package:wakewell/components/button.dart';
 import 'package:wakewell/components/textFeild.dart';
 
 import '../components/frostedAppBar.dart';
+import '../main.dart';
 import '../provider/provider.dart';
 
 class newEvent extends StatefulWidget {
@@ -64,8 +65,11 @@ class _newEventState extends State<newEvent> {
 
   @override
   Widget build(BuildContext context) {
+    /*
     var scHeight = Provider.of<auth>(context).screenHeight;
-    var scWidth = Provider.of<auth>(context).screenWidth;
+    var scWidth = Provider.of<auth>(context).screenWidth;*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -86,13 +90,12 @@ class _newEventState extends State<newEvent> {
                     child: ListView(
                       children: [
                         Container(
-                          height: scHeight - scWidth * 0.15 * 2,
+                          height: scHeight * 0.85,
                           padding: EdgeInsets.only(bottom: scHeight * 0.05),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                          child: ListView(
                             children: [
                               SizedBox(
-                                height: scHeight * 0.12,
+                                height: scHeight * 0.1,
                               ),
                               textFeild(
                                 controller: nameController,
@@ -186,6 +189,8 @@ class _newEventState extends State<newEvent> {
                                 child: Text(
                                   'عدد مرات تناول الدواء :',
                                   textAlign: TextAlign.start,
+                                  style:
+                                      TextStyle(fontSize: scWidth * fontSize),
                                 ),
                               ),
                               SizedBox(height: scHeight * 0.05),
@@ -249,37 +254,30 @@ class _newEventState extends State<newEvent> {
                                   suffix: "",
                                   enabled: true,
                                   type: TextInputType.text),
-                              Expanded(
-                                child: SizedBox(),
-                              ),
-                              button(
-                                  ontap: () {
-                                    choice1 == "none"
-                                        ? Provider.of<auth>(context,
-                                                listen: false)
-                                            .newEvent(
-                                            name,
-                                            choice2,
-                                            notes ?? "",
-                                            choice1,
-                                            context,
-                                            _formKey,
-                                          )
-                                        : Provider.of<auth>(context,
-                                                listen: false)
-                                            .newEvent(
-                                                name,
-                                                choice2,
-                                                notes ?? "",
-                                                choice1,
-                                                context,
-                                                _formKey,
-                                                time: time);
-                                  },
-                                  text: "حفظ")
                             ],
                           ),
                         ),
+                        Container(
+                          height: scHeight * 0.05,
+                          child: button(
+                              ontap: () {
+                                choice1 == "none"
+                                    ? Provider.of<auth>(context, listen: false)
+                                        .newEvent(
+                                        name,
+                                        choice2,
+                                        notes ?? "",
+                                        choice1,
+                                        context,
+                                        _formKey,
+                                      )
+                                    : Provider.of<auth>(context, listen: false)
+                                        .newEvent(name, choice2, notes ?? "",
+                                            choice1, context, _formKey,
+                                            time: time);
+                              },
+                              text: "حفظ"),
+                        )
                       ],
                     ),
                   ),
@@ -299,7 +297,7 @@ class _newEventState extends State<newEvent> {
                 child: Text(
                   'منبه جديد',
                   style: TextStyle(
-                    fontSize: Provider.of<auth>(context).screenHeight * 0.035,
+                    fontSize: scHeight * 0.035,
                     color: Color.fromARGB(255, 81, 84, 70),
                     fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.italic,

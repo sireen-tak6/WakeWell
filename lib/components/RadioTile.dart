@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wakewell/main.dart';
 import 'package:wakewell/provider/provider.dart';
 
 class RadioTile extends StatelessWidget {
@@ -12,13 +13,16 @@ class RadioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var scHeight = Provider.of<auth>(context).screenHeight;
+    /*
+    var scHeight = Provider.of<auth>(context).screenHeight;*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: RadioListTile(
           title: Text(
             label,
-            style: TextStyle(fontSize: scHeight * 0.017),
+            style: TextStyle(fontSize: scWidth * (fontSize - 0.02)),
           ),
           value: value,
           groupValue: Group,

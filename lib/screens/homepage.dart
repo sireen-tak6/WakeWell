@@ -7,14 +7,19 @@ import 'package:wakewell/provider/provider.dart';
 import 'package:wakewell/screens/dayAlarms.dart';
 import '../components/frostedAppBar.dart';
 import '../components/timeField.dart';
+import '../main.dart';
 
 class home extends StatelessWidget {
   const home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print('home');
+/*
     final scWidth = Provider.of<auth>(context).screenWidth;
-    final scHeight = Provider.of<auth>(context).screenHeight;
+    final scHeight = Provider.of<auth>(context).screenHeight;*/
+    var scHeight = MediaQuery.of(context).size.height;
+    var scWidth = MediaQuery.of(context).size.width;
     // to hide the status bar
     return Scaffold(
       body: Directionality(
@@ -63,7 +68,7 @@ class home extends StatelessWidget {
               child: Text(
                 'WakeWell',
                 style: TextStyle(
-                  fontSize: Provider.of<auth>(context).screenHeight * 0.035,
+                  fontSize: scWidth * fontSize,
                   color: Color.fromARGB(255, 81, 84, 70),
                   fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.italic,
