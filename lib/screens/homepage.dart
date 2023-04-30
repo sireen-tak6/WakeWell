@@ -66,7 +66,7 @@ class home extends StatelessWidget {
             blurStrengthY: 20,
             title: Center(
               child: Text(
-                'WakeWell',
+                'Daily Reminder',
                 style: TextStyle(
                   fontSize: scWidth * fontSize,
                   color: Color.fromARGB(255, 81, 84, 70),

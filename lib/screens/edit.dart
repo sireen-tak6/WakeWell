@@ -132,7 +132,7 @@ class _editEventState extends State<editEvent> {
                               ),
                               textFeild(
                                 controller: nameController,
-                                name: 'اسم الدواء',
+                                name: 'الاسم',
                                 focus: namefocus,
                                 valid: (value) {
                                   if (value == null || value.isEmpty) {

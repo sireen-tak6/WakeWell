@@ -19,14 +19,20 @@ class RadioTile extends StatelessWidget {
     var scWidth = MediaQuery.of(context).size.width;
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: RadioListTile(
+      child: Container(
+        child: RadioListTile(
           title: Text(
             label,
-            style: TextStyle(fontSize: scWidth * (fontSize - 0.02)),
+            style: TextStyle(fontSize: scWidth * (fontSize - 0.023)),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
           value: value,
           groupValue: Group,
-          onChanged: onChange),
+          onChanged: onChange,
+          contentPadding: EdgeInsets.all(0),
+        ),
+      ),
     );
   }
 }

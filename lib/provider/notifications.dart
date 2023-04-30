@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz1;
 import 'package:timezone/data/latest.dart' as tz;
 
 class noti {
   static Future initialize(FlutterLocalNotificationsPlugin flnb) async {
-    var andinit = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var andinit = new AndroidInitializationSettings('@mipmap/ic_launcher');
     var initsetting = new InitializationSettings(android: andinit);
     await flnb.initialize(initsetting);
   }
@@ -16,8 +17,10 @@ class noti {
       required hour,
       required minute,
       var payload,
+      required String image,
       required FlutterLocalNotificationsPlugin fln}) async {
     print('start');
+
     tz.initializeTimeZones();
     var dattime = DateTime(DateTime.now().year, DateTime.now().month,
         DateTime.now().day, hour, minute, 0);

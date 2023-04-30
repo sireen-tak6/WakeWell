@@ -4,6 +4,7 @@ import 'package:wakewell/components/button.dart';
 import 'package:wakewell/components/event.dart';
 import 'package:wakewell/screens/newEvent.dart';
 import '../components/frostedAppBar.dart';
+import '../main.dart';
 import '../provider/provider.dart';
 
 class dayAlarms extends StatelessWidget {
@@ -77,10 +78,16 @@ class dayAlarms extends StatelessWidget {
                   child: SizedBox(),
                 ),
                 button(
-                    ontap: () {
-                      Navigator.of(context).pushNamed(newEvent.routeName);
-                    },
-                    text: "منبه جديد"),
+                  ontap: () {
+                    Navigator.of(context).pushNamed(newEvent.routeName);
+                  },
+                  text: "تذكير جديد",
+                  icon: Icon(
+                    Icons.add,
+                    size: (fontSize + 0.01) * scWidth,
+                    color: Colors.white,
+                  ),
+                ),
                 Expanded(
                   child: SizedBox(),
                 ),
@@ -92,7 +99,7 @@ class dayAlarms extends StatelessWidget {
             blurStrengthY: 20,
             title: Center(
               child: Text(
-                'WakeWell',
+                'Daily Reminder',
                 style: TextStyle(
                   fontSize: scHeight * 0.035,
                   color: Color.fromARGB(255, 81, 84, 70),

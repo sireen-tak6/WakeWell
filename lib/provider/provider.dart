@@ -41,9 +41,9 @@ class auth with ChangeNotifier {
   String _sleepName = "";
   TimeOfDay _sleepTime = TimeOfDay.now();
   List<Map<String, Object>> _meals = [
-    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'الوجبة الأولى'},
-    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'الوجبة الثانية'},
-    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'الوجبة الثالثة'}
+    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'الفطور'},
+    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'الغداء'},
+    {'meal': TimeOfDay.now(), 'notes': "", 'name': 'العشاء'}
   ];
   TimeOfDay _meal1Time = TimeOfDay.now();
   TimeOfDay _meal2Time = TimeOfDay.now();
@@ -112,13 +112,6 @@ class auth with ChangeNotifier {
       'time': _wakeTime.hour.toString() + ":" + _wakeTime.minute.toString(),
       'notes': _wakeNotes
     });
-    noti.showBigTextNotification(
-        id: -5,
-        title: _wakename,
-        body: _wakeNotes,
-        hour: _wakeTime.hour,
-        minute: _wakeTime.minute,
-        fln: flnp);
     saveEvents('sleep', {
       'name': 'وقت النوم',
       'time': _sleepTime.hour.toString() + ":" + _sleepTime.minute.toString(),
@@ -130,6 +123,7 @@ class auth with ChangeNotifier {
         body: _sleepNotes,
         hour: _sleepTime.hour,
         minute: _sleepTime.minute,
+        image: "ic_stat_sleep",
         fln: flnp);
     DateTime _wakeDateTime =
         DateTime(2023, 1, 1, _wakeTime.hour, _wakeTime.minute);
@@ -143,25 +137,25 @@ class auth with ChangeNotifier {
     TimeOfDay _meal3 = TimeOfDay.fromDateTime(meal3Time);
     var _mealsString = [
       {
-        'name': 'الوجبة الأولى',
+        'name': 'الفطور',
         'meal': _meal1.hour.toString() + ":" + _meal1.minute.toString(),
         'notes': ""
       },
       {
-        'name': 'الوجبة الثانية',
+        'name': 'الغداء',
         'meal': _meal2.hour.toString() + ":" + _meal2.minute.toString(),
         'notes': ""
       },
       {
-        'name': 'الوجبة الثالثة',
+        'name': 'العشاء',
         'meal': _meal3.hour.toString() + ":" + _meal3.minute.toString(),
         'notes': ""
       }
     ];
     _meals = [
-      {'meal': _meal1, 'notes': "", 'name': 'الوجبة الأولى'},
-      {'meal': _meal2, 'notes': "", 'name': 'الوجبة الثانية'},
-      {'meal': _meal3, 'notes': "", 'name': 'الوجبة الثالثة'}
+      {'meal': _meal1, 'notes': "", 'name': 'الغطور'},
+      {'meal': _meal2, 'notes': "", 'name': 'الغداء'},
+      {'meal': _meal3, 'notes': "", 'name': 'العشاء'}
     ];
     _meal1Time = _meal1;
     _meal2Time = _meal2;
@@ -173,6 +167,7 @@ class auth with ChangeNotifier {
         body: _meals[0]['notes'].toString(),
         hour: _meal1Time.hour,
         minute: _meal1Time.minute,
+        image: "ic_stat_food",
         fln: flnp);
     noti.showBigTextNotification(
         id: -2,
@@ -180,6 +175,7 @@ class auth with ChangeNotifier {
         body: _meals[1]['notes'].toString(),
         hour: _meal2Time.hour,
         minute: _meal2Time.minute,
+        image: "ic_stat_food",
         fln: flnp);
     noti.showBigTextNotification(
         id: -1,
@@ -187,6 +183,7 @@ class auth with ChangeNotifier {
         body: _meals[2]['notes'].toString(),
         hour: _meal3Time.hour,
         minute: _meal3Time.minute,
+        image: "ic_stat_food",
         fln: flnp);
     saveEvents('meals', _mealsString);
 
@@ -210,6 +207,7 @@ class auth with ChangeNotifier {
           body: _sleepNotes,
           hour: _sleepTime.hour,
           minute: _sleepTime.minute,
+          image: "ic_stat_sleep",
           fln: flnp);
     }
 
@@ -221,13 +219,6 @@ class auth with ChangeNotifier {
           minute: int.parse(temp.split(':')[1]));
       _wakeNotes = data['notes'];
       _wakename = data['name'];
-      noti.showBigTextNotification(
-          id: -5,
-          title: _wakename,
-          body: _wakeNotes,
-          hour: _wakeTime.hour,
-          minute: _wakeTime.minute,
-          fln: flnp);
     }
     if (sp.getString('meals') != null) {
       var temp = await json.decode(sp.getString('meals') ?? "");
@@ -255,6 +246,7 @@ class auth with ChangeNotifier {
           body: _meals[0]['notes'].toString(),
           hour: _meal1Time.hour,
           minute: _meal1Time.minute,
+          image: "ic_stat_food",
           fln: flnp);
       noti.showBigTextNotification(
           id: -2,
@@ -262,6 +254,7 @@ class auth with ChangeNotifier {
           body: _meals[1]['notes'].toString(),
           hour: _meal2Time.hour,
           minute: _meal2Time.minute,
+          image: "ic_stat_food",
           fln: flnp);
       noti.showBigTextNotification(
           id: -1,
@@ -269,6 +262,7 @@ class auth with ChangeNotifier {
           body: _meals[2]['notes'].toString(),
           hour: _meal3Time.hour,
           minute: _meal3Time.minute,
+          image: "ic_stat_food",
           fln: flnp);
       print("build");
     }
@@ -291,6 +285,7 @@ class auth with ChangeNotifier {
             body: _med1['notes'].toString(),
             hour: _med1['time'].hour,
             minute: _med1['time'].minute,
+            image: "ic_stat_medicine",
             fln: flnp);
       }
     }
@@ -340,6 +335,7 @@ class auth with ChangeNotifier {
             body: med1['notes'].toString(),
             hour: med1['time'].hour,
             minute: med1['time'].minute,
+            image: "ic_stat_medicine",
             fln: flnp);
       } else if (times == "twice") {
         var _time1;
@@ -378,6 +374,7 @@ class auth with ChangeNotifier {
             body: med1['notes'].toString(),
             hour: med1['time'].hour,
             minute: med1['time'].minute,
+            image: "ic_stat_medicine",
             fln: flnp);
         var med2 = {
           'name': name,
@@ -394,6 +391,7 @@ class auth with ChangeNotifier {
             body: med2['notes'].toString(),
             hour: med2['time'].hour,
             minute: med2['time'].minute,
+            image: "ic_stat_medicine",
             fln: flnp);
       } else {
         var _time1;
@@ -439,6 +437,7 @@ class auth with ChangeNotifier {
               body: med1['notes'].toString(),
               hour: med1['time'].hour,
               minute: med1['time'].minute,
+              image: "ic_stat_medicine",
               fln: flnp);
           var med2 = {
             'name': name,
@@ -455,6 +454,7 @@ class auth with ChangeNotifier {
               body: med2['notes'].toString(),
               hour: med2['time'].hour,
               minute: med2['time'].minute,
+              image: "ic_stat_medicine",
               fln: flnp);
           var med3 = {
             'name': name,
@@ -471,6 +471,7 @@ class auth with ChangeNotifier {
               body: med3['notes'].toString(),
               hour: med3['time'].hour,
               minute: med3['time'].minute,
+              image: "ic_stat_medicine",
               fln: flnp);
         }
       }
@@ -521,6 +522,7 @@ class auth with ChangeNotifier {
             body: _med1['notes'],
             hour: _medicens[i]['time'].hour,
             minute: _medicens[i]['time'].minute,
+            image: "ic_stat_medicine",
             fln: flnp);
       }
       saveEvents('med', _meds);
@@ -538,6 +540,7 @@ class auth with ChangeNotifier {
             body: notes,
             hour: time.hour,
             minute: time.minute,
+            image: "ic_stat_food",
             fln: flnp);
       } else if (id == 1) {
         _meal2Time = time;
@@ -547,6 +550,7 @@ class auth with ChangeNotifier {
             body: notes,
             hour: time.hour,
             minute: time.minute,
+            image: "ic_stat_food",
             fln: flnp);
       } else {
         _meal3Time = time;
@@ -556,6 +560,7 @@ class auth with ChangeNotifier {
             body: notes,
             hour: time.hour,
             minute: time.minute,
+            image: "ic_stat_food",
             fln: flnp);
       }
       var _mealsString = [
@@ -596,6 +601,7 @@ class auth with ChangeNotifier {
             body: notes,
             hour: time.hour,
             minute: time.minute,
+            image: "ic_stat_sleep",
             fln: flnp);
         print(_sleepNotes);
       } else {
@@ -607,13 +613,6 @@ class auth with ChangeNotifier {
           'time': _wakeTime.hour.toString() + ":" + _wakeTime.minute.toString(),
           'notes': _wakeNotes
         });
-        noti.showBigTextNotification(
-            id: -5,
-            title: name,
-            body: notes,
-            hour: time.hour,
-            minute: time.minute,
-            fln: flnp);
       }
     }
 
@@ -643,6 +642,7 @@ class auth with ChangeNotifier {
           body: _med1['notes'],
           hour: _medicens[i]['time'].hour,
           minute: _medicens[i]['time'].minute,
+          image: "ic_stat_medicine",
           fln: flnp);
       _meds.add(_med1);
     }

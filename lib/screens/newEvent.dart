@@ -99,7 +99,7 @@ class _newEventState extends State<newEvent> {
                               ),
                               textFeild(
                                 controller: nameController,
-                                name: 'اسم الدواء',
+                                name: 'الاسم',
                                 focus: namefocus,
                                 valid: (value) {
                                   if (value == null || value.isEmpty) {
@@ -197,42 +197,48 @@ class _newEventState extends State<newEvent> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: RadioTile(
-                                      Group: choice2,
-                                      value: 'once',
-                                      label: 'مرة',
-                                      onChange: (value) {
-                                        setState(() {
-                                          choice2 = value.toString();
-                                          print(choice2);
-                                        });
-                                      },
+                                    child: Container(
+                                      child: RadioTile(
+                                        Group: choice2,
+                                        value: 'once',
+                                        label: 'مرة',
+                                        onChange: (value) {
+                                          setState(() {
+                                            choice2 = value.toString();
+                                            print(choice2);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                   Expanded(
-                                    child: RadioTile(
-                                      Group: choice2,
-                                      value: 'twice',
-                                      label: 'مرتين',
-                                      onChange: (value) {
-                                        setState(() {
-                                          choice2 = value.toString();
-                                          print(choice2);
-                                        });
-                                      },
+                                    child: Container(
+                                      child: RadioTile(
+                                        Group: choice2,
+                                        value: 'twice',
+                                        label: 'مرتين',
+                                        onChange: (value) {
+                                          setState(() {
+                                            choice2 = value.toString();
+                                            print(choice2);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                   Expanded(
-                                    child: RadioTile(
-                                      Group: choice2,
-                                      value: 'three_times',
-                                      label: 'ثلاث مرات',
-                                      onChange: (value) {
-                                        setState(() {
-                                          choice2 = value.toString();
-                                          print(choice2);
-                                        });
-                                      },
+                                    child: Container(
+                                      child: RadioTile(
+                                        Group: choice2,
+                                        value: 'three_times',
+                                        label: 'ثلاث مرات',
+                                        onChange: (value) {
+                                          setState(() {
+                                            choice2 = value.toString();
+                                            print(choice2);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -295,7 +301,7 @@ class _newEventState extends State<newEvent> {
               blurStrengthY: 20,
               title: Center(
                 child: Text(
-                  'منبه جديد',
+                  'تذكير جديد',
                   style: TextStyle(
                     fontSize: scHeight * 0.035,
                     color: Color.fromARGB(255, 81, 84, 70),

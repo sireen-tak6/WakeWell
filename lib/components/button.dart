@@ -1,14 +1,18 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 //import 'package:provider/provider.dart';
 //import 'package:wakewell/provider/provider.dart';
 import 'package:wakewell/main.dart';
 
+import '../provider/provider.dart';
+
 class button extends StatelessWidget {
   final ontap;
   final text;
-  const button({super.key, required this.ontap, required this.text});
+  var icon;
+  button({super.key, required this.ontap, required this.text, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class button extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
               child: Container(
+                height: scHeight > 500 ? scHeight * 0.06 : 50,
+                width: scWidth * 0.8,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -47,11 +53,37 @@ class button extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: scWidth * fontSize,
-                        fontWeight: FontWeight.w600),
+                  child: Stack(
+                    children: [
+                      Align(
+                          alignment: Alignment.centerRight,
+                          child: icon != null
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  width: scWidth * 0.08,
+                                  height: scWidth * 0.08,
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [
+                                          Color.fromARGB(115, 138, 152, 128),
+                                          Color.fromARGB(192, 92, 104, 83)
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Center(child: icon),
+                                )
+                              : Container()),
+                      Center(
+                        child: Text(
+                          text,
+                          style: TextStyle(
+                              fontSize: scWidth * fontSize,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

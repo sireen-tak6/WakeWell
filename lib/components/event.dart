@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:wakewell/components/timeField.dart';
 import 'package:wakewell/main.dart';
 import 'package:wakewell/screens/edit.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import '../provider/provider.dart';
 
 class event extends StatelessWidget {
@@ -28,6 +28,13 @@ class event extends StatelessWidget {
         .width; /*
     var scHeight = Provider.of<auth>(context).screenHeight;
     var scWidth = Provider.of<auth>(context).screenWidth;*/
+    String image = type == "sleep"
+        ? "assets/sleep.svg"
+        : type == "wake"
+            ? "assets/wake2.svg"
+            : type == "meal"
+                ? "assets/food.svg"
+                : "assets/medicine.svg";
     return Directionality(
       textDirection: TextDirection.rtl,
       child: GestureDetector(
@@ -56,9 +63,34 @@ class event extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Container(
+                    width: scHeight * 0.05,
+                    padding: EdgeInsets.all(scHeight * 0.01),
+                    height: scHeight * 0.05,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(115, 138, 152, 128),
+                            Color.fromARGB(192, 92, 104, 83)
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(scWidth * 0.2)),
+                    child: Container(
+                        width: scHeight * 0.025,
+                        height: scHeight * 0.025,
+                        child: SvgPicture.asset(
+                          image,
+                        )),
+                  ),
+                  SizedBox(width: scWidth * 0.05),
                   Text(
                     name,
                     style: TextStyle(fontSize: scWidth * fontSize),
+                  ),
+                  Expanded(
+                    child: SizedBox(),
                   ),
                   Text(
                     time.format(context),

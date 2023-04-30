@@ -53,8 +53,7 @@ class _FrostedAppBarState extends State<FrostedAppBar> {
               child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: 15),
-                    width: scWidth * 0.01,
+                    width: scWidth * 0.07,
                     color: Colors.transparent,
                     child: widget.leading,
                   ),
